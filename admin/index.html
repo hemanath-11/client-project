@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Overview | Pet Haven</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <a href="index.html" class="brand-logo" style="font-size: 1.25rem;">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span>Pet Haven Admin</span>
+        </a>
+      </div>
+
+      <div class="admin-profile">
+        <div class="admin-avatar">A</div>
+        <div>
+          <strong style="display: block; font-size: 0.9rem; color: #0F172A;">Store Manager</strong>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">admin@pethaven.com</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item"><a href="index.html" class="active">Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="pets.html">Pets Management</a></li>
+        <li class="admin-nav-item"><a href="birds.html">Birds Management</a></li>
+        <li class="admin-nav-item"><a href="products.html">Products Management</a></li>
+        <li class="admin-nav-item"><a href="enquiries.html">Customer Enquiries</a></li>
+        <li class="admin-nav-item" style="margin-top: auto;">
+          <a href="../index.html" target="_blank" style="color: var(--primary-700);">🌐 View Website</a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#" id="admin-logout-btn" style="color: var(--danger);">Logout</a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">Dashboard Overview</h1>
+          <p class="text-muted" style="font-size: 0.9rem;">Store metrics summary and quick management</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem;">
+          <a href="pets.html" class="btn btn-primary btn-sm">+ Add Pet</a>
+          <a href="products.html" class="btn btn-secondary btn-sm">+ Add Product</a>
+        </div>
+      </div>
+
+      <!-- Metrics Cards Grid (Figma Dashboard View) -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Total Pets</span>
+            <span>🐶</span>
+          </div>
+          <div id="metric-total-pets" class="metric-value">0</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Available Pets</span>
+            <span>✨</span>
+          </div>
+          <div id="metric-avail-pets" class="metric-value">0</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Total Birds</span>
+            <span>🦜</span>
+          </div>
+          <div id="metric-total-birds" class="metric-value">0</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Available Birds</span>
+            <span>🌿</span>
+          </div>
+          <div id="metric-avail-birds" class="metric-value">0</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Total Products</span>
+            <span>📦</span>
+          </div>
+          <div id="metric-total-prods" class="metric-value">0</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-title">Products In Stock</span>
+            <span>🛒</span>
+          </div>
+          <div id="metric-instock-prods" class="metric-value">0</div>
+        </div>
+
+        <div class="metric-card highlight">
+          <div class="metric-header">
+            <span class="metric-title">New Enquiries</span>
+            <span>📩</span>
+          </div>
+          <div id="metric-new-enquiries" class="metric-value">0</div>
+        </div>
+      </div>
+
+      <!-- Quick Guidance Card -->
+      <div class="admin-card" style="padding: 2rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">Welcome to Pet Haven Management Portal</h3>
+        <p class="text-muted" style="line-height: 1.6; margin-bottom: 1.5rem;">
+          Use the left navigation bar to add, update, or remove pets, birds, and store products. All changes instantly reflect on the customer-facing website!
+        </p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="pets.html" class="btn btn-outline btn-sm">Manage Pets →</a>
+          <a href="birds.html" class="btn btn-outline btn-sm">Manage Birds →</a>
+          <a href="products.html" class="btn btn-outline btn-sm">Manage Products →</a>
+          <a href="enquiries.html" class="btn btn-outline btn-sm">View Enquiries →</a>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

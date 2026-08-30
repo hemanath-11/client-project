@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Birds | Pet Haven Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <a href="index.html" class="brand-logo" style="font-size: 1.25rem;">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span>Pet Haven Admin</span>
+        </a>
+      </div>
+
+      <div class="admin-profile">
+        <div class="admin-avatar">A</div>
+        <div>
+          <strong style="display: block; font-size: 0.9rem; color: #0F172A;">Store Manager</strong>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">admin@pethaven.com</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item"><a href="index.html">Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="pets.html">Pets Management</a></li>
+        <li class="admin-nav-item"><a href="birds.html" class="active">Birds Management</a></li>
+        <li class="admin-nav-item"><a href="products.html">Products Management</a></li>
+        <li class="admin-nav-item"><a href="enquiries.html">Customer Enquiries</a></li>
+        <li class="admin-nav-item" style="margin-top: auto;">
+          <a href="../index.html" target="_blank" style="color: var(--primary-700);">🌐 View Website</a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#" id="admin-logout-btn" style="color: var(--danger);">Logout</a>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">Birds Inventory</h1>
+          <p class="text-muted" style="font-size: 0.9rem;">Manage Budgies, Cockatiels, Lovebirds & Parrots</p>
+        </div>
+        <button onclick="openAddBirdModal()" class="btn btn-primary btn-sm">+ Add New Bird</button>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table id="admin-birds-table" class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Species</th>
+                <th>Age / Gender</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="birds-table-body">
+              <!-- Loaded dynamically via js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Bird Modal -->
+  <div id="bird-modal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="bird-modal-title" style="font-weight: 700;">Add New Bird</h3>
+        <button onclick="closeBirdModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <form id="bird-form" onsubmit="saveBirdForm(event)">
+        <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem;">
+          <input type="hidden" id="bird-id">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Bird Name</label>
+              <input type="text" id="bird-name" class="form-input" required placeholder="e.g. Rio">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Species</label>
+              <input type="text" id="bird-species" class="form-input" required placeholder="e.g. Blue Budgerigar">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Age</label>
+              <input type="text" id="bird-age" class="form-input" required placeholder="e.g. Young">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Gender</label>
+              <select id="bird-gender" class="form-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Pair">Pair</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Price (₹)</label>
+              <input type="number" id="bird-price" class="form-input" required min="0" placeholder="1200">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Availability</label>
+            <select id="bird-availability" class="form-select">
+              <option value="Available">Available</option>
+              <option value="Adopted">Adopted</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea id="bird-description" class="form-input" rows="3" required placeholder="Describe coloration, behavior..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Bird Image(s)</label>
+            <input type="file" id="bird-file-input" class="form-input" accept="image/*" multiple onchange="handleImagePreview(this, 'bird-image-previews')">
+            <div id="bird-image-previews" class="image-preview-container"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" onclick="closeBirdModal()" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Bird</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

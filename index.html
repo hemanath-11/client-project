@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Haven | Pets, Birds & Pet Products Shop</title>
+  <meta name="description" content="Find healthy puppies, kittens, birds, aquarium fish, and premium pet supplies at Pet Haven. Your trusted local pet shop.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span>Pet Haven</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li><a href="pets.html" class="nav-link">Pets & Puppies</a></li>
+          <li><a href="birds.html" class="nav-link">Birds</a></li>
+          <li><a href="products.html" class="nav-link">Pet Products</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Store</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section (Figma Exact Layout) -->
+  <section class="hero-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title">Everything Your Pet Needs, All in One Place</h1>
+        <p class="hero-subtitle">Discover healthy, vaccinated puppies, kittens, birds, and premium pet supplies cared for by certified experts.</p>
+        
+        <div class="hero-cta-group">
+          <a href="pets.html" class="btn btn-primary">Find a Pet</a>
+          <a href="products.html" class="btn btn-secondary">Explore Supplies</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>Happy Adopted Pets</p>
+          </div>
+          <div class="stat-item">
+            <h3>100%</h3>
+            <p>Verified Health Check</p>
+          </div>
+          <div class="stat-item">
+            <h3>4.9★</h3>
+            <p>Customer Rating</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <img src="assets/hero_pets.jpg" alt="Golden Retriever puppy and Kitten" width="600" height="460">
+        <div class="hero-floating-badge">
+          <div style="background: var(--primary-100); color: var(--primary-800); width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700;">✓</div>
+          <div>
+            <strong style="display: block; font-size: 0.9rem; color: #0F172A;">100% Health Guaranteed</strong>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Vaccinated & Vet Checked</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Explore by Category Section (Figma Exact Cards) -->
+  <section class="container" style="padding: 2rem 1.5rem 4rem;">
+    <div class="section-header text-center">
+      <h2 class="section-title">Explore by Category</h2>
+      <p class="section-subtitle">Find your favorite companion or browse essential food & care items</p>
+    </div>
+
+    <div class="category-grid">
+      <div class="category-card featured-photo" style="background-image: url('assets/hero_pets.jpg');" onclick="location.href='pets.html'">
+        <div>
+          <span class="badge badge-featured">Popular Choice</span>
+        </div>
+        <div>
+          <h3>Pets & Puppies</h3>
+          <p style="opacity: 0.9; font-size: 0.9rem;">Golden Retrievers, Persians, Bulldogs & more</p>
+        </div>
+      </div>
+
+      <div class="category-card tint-green" onclick="location.href='birds.html'">
+        <div class="category-icon-box">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+        </div>
+        <div>
+          <h3>Exotic Birds</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Budgies, Cockatiels & Lovebirds</p>
+        </div>
+      </div>
+
+      <div class="category-card tint-blue" onclick="location.href='products.html'">
+        <div class="category-icon-box">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+        </div>
+        <div>
+          <h3>Premium Supplies</h3>
+          <p class="text-muted" style="font-size: 0.85rem; margin-top: 0.25rem;">Orthopedic Beds, Foods & Toys</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Pets Grid -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="flex-between section-header">
+      <div>
+        <h2 class="section-title">Meet Our Latest Pets</h2>
+        <p class="section-subtitle">Healthy, energetic pets ready to join loving families</p>
+      </div>
+      <a href="pets.html" class="btn btn-outline">View All Pets →</a>
+    </div>
+
+    <div id="home-pets-grid" class="item-grid">
+      <!-- Dynamically rendered via JS -->
+    </div>
+  </section>
+
+  <!-- Featured Products Section -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div class="flex-between section-header">
+      <div>
+        <h2 class="section-title">Top Rated Pet Accessories</h2>
+        <p class="section-subtitle">Premium food, cozy beds, and durable toys</p>
+      </div>
+      <a href="products.html" class="btn btn-outline">View All Products →</a>
+    </div>
+
+    <div id="home-products-grid" class="item-grid">
+      <!-- Dynamically rendered via JS -->
+    </div>
+  </section>
+
+  <!-- Store Callout / Customer Guarantee CTA -->
+  <section class="container" style="margin-bottom: 5rem;">
+    <div style="background: linear-gradient(135deg, var(--primary-900) 0%, var(--primary-dark) 100%); border-radius: var(--radius-xl); padding: 3.5rem 2.5rem; color: #FFFFFF; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+      <div style="max-width: 600px;">
+        <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 0.75rem;">Have Questions About Adoption or Care?</h2>
+        <p style="opacity: 0.9; font-size: 1.05rem;">Our expert vet team and store owners are ready to assist you on WhatsApp 24/7.</p>
+      </div>
+      <a href="https://wa.me/918807773526?text=Hi%20Pet%20Haven%2C%20I%20have%20a%20question%20about%20your%20available%20pets%20and%20supplies." target="_blank" class="btn btn-whatsapp" style="padding: 1rem 2rem; font-size: 1.1rem;">
+        Chat on WhatsApp
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="brand-logo" style="margin-bottom: 1rem; display: inline-flex;">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            <span>Pet Haven</span>
+          </a>
+          <p class="text-muted" style="font-size: 0.9rem; line-height: 1.6; max-width: 320px;">
+            Your trusted local pet store bringing joy to homes with healthy pets, pure breeds, and top-tier accessories.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pets.html">Dogs & Cats</a></li>
+            <li><a href="birds.html">Exotic Birds</a></li>
+            <li><a href="products.html">Pet Products</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul class="footer-links">
+            <li><a href="pets.html?cat=Dog">Puppies</a></li>
+            <li><a href="pets.html?cat=Cat">Kittens</a></li>
+            <li><a href="birds.html">Birds</a></li>
+            <li><a href="products.html?cat=Pet%20Food">Pet Food</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Store Location & Contact</h4>
+          <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.5rem;">📍 123 Pet Haven Avenue, Central Park Road</p>
+          <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 0.5rem;">📞 +91 88077 73526</p>
+          <p class="text-muted" style="font-size: 0.9rem;">✉️ contact@pethaven.com</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pet Haven Store. All rights reserved.</p>
+        <div>
+          <a href="admin/login.html" style="color: var(--primary-800); font-weight: 600;">Admin Dashboard Login →</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const petsContainer = document.getElementById('home-pets-grid');
+      const productsContainer = document.getElementById('home-products-grid');
+
+      if (petsContainer) {
+        const pets = await db.getPets();
+        petsContainer.innerHTML = pets.slice(0, 3).map(createPetCardHtml).join('');
+      }
+
+      if (productsContainer) {
+        const prods = await db.getProducts();
+        productsContainer.innerHTML = prods.slice(0, 3).map(createProductCardHtml).join('');
+      }
+    });
+  </script>
+</body>
+</html>

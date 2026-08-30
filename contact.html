@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact & Store Location | Pet Haven</title>
+  <meta name="description" content="Get in touch with Pet Haven team for pet inquiries, store visits, and adoption details.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span>Pet Haven</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="pets.html" class="nav-link">Pets & Puppies</a></li>
+          <li><a href="birds.html" class="nav-link">Birds</a></li>
+          <li><a href="products.html" class="nav-link">Pet Products</a></li>
+          <li><a href="contact.html" class="nav-link active">Contact & Store</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
+    <div class="section-header text-center">
+      <h1 class="section-title">Get in Touch with Pet Haven</h1>
+      <p class="section-subtitle">Have questions about pet adoption, nutrition, or store visits? We are here to help!</p>
+    </div>
+
+    <div class="detail-grid" style="margin-top: 2rem;">
+      <!-- Contact Info -->
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div style="background: var(--primary-50); border-radius: var(--radius-lg); padding: 1.75rem; border: 1px solid var(--primary-200);">
+          <h3 style="color: var(--primary-900); font-weight: 700; margin-bottom: 0.75rem;">Store Information</h3>
+          <p style="margin-bottom: 0.5rem; color: #1E293B;"><strong>📍 Store Address:</strong> 123 Pet Haven Avenue, Central Park Road, Cityville</p>
+          <p style="margin-bottom: 0.5rem; color: #1E293B;"><strong>📞 Phone / WhatsApp:</strong> +91 88077 73526</p>
+          <p style="margin-bottom: 0.5rem; color: #1E293B;"><strong>✉️ Email:</strong> support@pethaven.com</p>
+          <p style="color: #1E293B;"><strong>⏰ Opening Hours:</strong> Mon - Sun: 9:00 AM - 9:00 PM</p>
+        </div>
+
+        <div style="background: #FFFFFF; border-radius: var(--radius-lg); padding: 1.75rem; border: 1px solid var(--border-light);">
+          <h3 style="font-weight: 700; margin-bottom: 0.5rem;">Direct WhatsApp Support</h3>
+          <p class="text-muted" style="font-size: 0.9rem; margin-bottom: 1.25rem;">Chat instantly with our store representative for photos, video calls, or booking pets.</p>
+          <a href="https://wa.me/918807773526?text=Hi%20Pet%20Haven%2C%20I%20would%20like%20to%20enquire%20about%20visiting%20your%20store." target="_blank" class="btn btn-whatsapp btn-full">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            Start WhatsApp Chat
+          </a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div>
+        <h3 style="font-weight: 800; font-size: 1.5rem; margin-bottom: 1rem;">Send Us a Message</h3>
+        <form id="contact-page-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" id="contact-name" class="form-input" required placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="contact-phone" class="form-input" required placeholder="+91 88077 73526">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="contact-email" class="form-input" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Interested In (Optional)</label>
+            <input type="text" id="contact-interest" class="form-input" placeholder="e.g. Golden Retriever Puppy or Royal Canin Food">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your Message</label>
+            <textarea id="contact-message" class="form-input" rows="4" required placeholder="Type your inquiry here..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full" style="min-height: 48px;">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pet Haven Store. All rights reserved.</p>
+        <a href="admin/login.html" style="color: var(--primary-800); font-weight: 600;">Admin Dashboard Login →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

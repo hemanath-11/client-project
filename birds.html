@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exotic Birds for Sale | Pet Haven</title>
+  <meta name="description" content="Explore healthy exotic birds, parakeets, budgies, cockatiels, and lovebirds. Hand-tamed and healthy.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span>Pet Haven</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="pets.html" class="nav-link">Pets & Puppies</a></li>
+          <li><a href="birds.html" class="nav-link active">Birds</a></li>
+          <li><a href="products.html" class="nav-link">Pet Products</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Store</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="container" style="padding-top: 3rem; padding-bottom: 1.5rem;">
+    <div class="section-header text-center">
+      <h1 class="section-title">Exotic Birds & Parakeets</h1>
+      <p class="section-subtitle">Chirping, colorful, and friendly avian companions cared for by experts</p>
+    </div>
+
+    <!-- Search & Filter Card -->
+    <div class="filter-bar-card">
+      <div class="filter-grid">
+        <div class="form-group">
+          <label class="form-label">Search Bird</label>
+          <input type="text" id="search-input" class="form-input" placeholder="Search by name or species...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Species</label>
+          <select id="species-filter" class="form-select">
+            <option value="">All Species</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Gender</label>
+          <select id="gender-filter" class="form-select">
+            <option value="">Any Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Pair">Pair</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Availability</label>
+          <select id="availability-filter" class="form-select">
+            <option value="">All</option>
+            <option value="Available">Available</option>
+            <option value="Adopted">Adopted</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="justify-content: flex-end;">
+          <button type="button" class="btn btn-primary" style="margin-top: auto;">Filter Birds</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Birds Grid -->
+    <div id="birds-grid" class="item-grid">
+      <!-- Loaded dynamically via js/birds.js -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pet Haven Store. All rights reserved.</p>
+        <a href="admin/login.html" style="color: var(--primary-800); font-weight: 600;">Admin Dashboard Login →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/birds.js"></script>
+</body>
+</html>

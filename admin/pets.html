@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Pets | Pet Haven Admin</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-brand">
+        <a href="index.html" class="brand-logo" style="font-size: 1.25rem;">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          <span>Pet Haven Admin</span>
+        </a>
+      </div>
+
+      <div class="admin-profile">
+        <div class="admin-avatar">A</div>
+        <div>
+          <strong style="display: block; font-size: 0.9rem; color: #0F172A;">Store Manager</strong>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">admin@pethaven.com</span>
+        </div>
+      </div>
+
+      <ul class="admin-nav">
+        <li class="admin-nav-item"><a href="index.html">Dashboard Overview</a></li>
+        <li class="admin-nav-item"><a href="pets.html" class="active">Pets Management</a></li>
+        <li class="admin-nav-item"><a href="birds.html">Birds Management</a></li>
+        <li class="admin-nav-item"><a href="products.html">Products Management</a></li>
+        <li class="admin-nav-item"><a href="enquiries.html">Customer Enquiries</a></li>
+        <li class="admin-nav-item" style="margin-top: auto;">
+          <a href="../index.html" target="_blank" style="color: var(--primary-700);">🌐 View Website</a>
+        </li>
+        <li class="admin-nav-item">
+          <a href="#" id="admin-logout-btn" style="color: var(--danger);">Logout</a>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-title">Pets Inventory</h1>
+          <p class="text-muted" style="font-size: 0.9rem;">Add, edit, or remove dogs, cats & aquarium pets</p>
+        </div>
+        <button onclick="openAddPetModal()" class="btn btn-primary btn-sm">+ Add New Pet</button>
+      </div>
+
+      <div class="admin-card">
+        <div class="table-responsive">
+          <table id="admin-pets-table" class="admin-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category / Breed</th>
+                <th>Age / Gender</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="pets-table-body">
+              <!-- Loaded dynamically via js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Add/Edit Pet Modal -->
+  <div id="pet-modal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="pet-modal-title" style="font-weight: 700;">Add New Pet</h3>
+        <button onclick="closePetModal()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+      </div>
+
+      <form id="pet-form" onsubmit="savePetForm(event)">
+        <div class="modal-body" style="display: flex; flex-direction: column; gap: 1rem;">
+          <input type="hidden" id="pet-id">
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Pet Name</label>
+              <input type="text" id="pet-name" class="form-input" required placeholder="e.g. Cleo">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <select id="pet-category" class="form-select" required>
+                <option value="Dog">Dog</option>
+                <option value="Cat">Cat</option>
+                <option value="Fish">Fish</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Breed</label>
+              <input type="text" id="pet-breed" class="form-input" required placeholder="e.g. Golden Retriever">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Age</label>
+              <input type="text" id="pet-age" class="form-input" required placeholder="e.g. 3 Months">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label">Gender</label>
+              <select id="pet-gender" class="form-select">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Pair">Pair</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Price (₹)</label>
+              <input type="number" id="pet-price" class="form-input" required min="0" placeholder="25000">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Availability</label>
+              <select id="pet-availability" class="form-select">
+                <option value="Available">Available</option>
+                <option value="Adopted">Adopted</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Description</label>
+            <textarea id="pet-description" class="form-input" rows="3" required placeholder="Describe health, temperament, vaccination..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Care Instructions (Optional)</label>
+            <input type="text" id="pet-care" class="form-input" placeholder="e.g. Needs daily combing and premium kibble">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Pet Image(s)</label>
+            <input type="file" id="pet-file-input" class="form-input" accept="image/*" multiple onchange="handleImagePreview(this, 'pet-image-previews')">
+            <div id="pet-image-previews" class="image-preview-container"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" onclick="closePetModal()" class="btn btn-outline">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Pet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/config.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

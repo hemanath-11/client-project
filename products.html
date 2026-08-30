@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Products, Food & Supplies | Pet Haven</title>
+  <meta name="description" content="Shop orthopedic dog beds, Royal Canin dog food, cat toys, bird cages, and grooming accessories at Pet Haven.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-5l6 2.5-6 2.5zm1-9.5c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+        <span>Pet Haven</span>
+      </a>
+
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="pets.html" class="nav-link">Pets & Puppies</a></li>
+          <li><a href="birds.html" class="nav-link">Birds</a></li>
+          <li><a href="products.html" class="nav-link active">Pet Products</a></li>
+          <li><a href="contact.html" class="nav-link">Contact & Store</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="contact.html" class="btn btn-primary btn-sm">Contact Us</a>
+        <button class="mobile-nav-toggle" aria-label="Toggle navigation menu">
+          <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Header -->
+  <div class="container" style="padding-top: 3rem; padding-bottom: 1.5rem;">
+    <div class="section-header text-center">
+      <h1 class="section-title">Pet Products & Supplies</h1>
+      <p class="section-subtitle">Top brand pet food, orthopedic bedding, toys, and grooming gear</p>
+    </div>
+
+    <!-- Search & Filter Card -->
+    <div class="filter-bar-card">
+      <div class="filter-grid">
+        <div class="form-group">
+          <label class="form-label">Search Product</label>
+          <input type="text" id="search-input" class="form-input" placeholder="Search product name or brand...">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Category</label>
+          <select id="category-filter" class="form-select">
+            <option value="">All Categories</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Brand</label>
+          <select id="brand-filter" class="form-select">
+            <option value="">All Brands</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Availability</label>
+          <select id="availability-filter" class="form-select">
+            <option value="">All</option>
+            <option value="In Stock">In Stock</option>
+            <option value="Out of Stock">Out of Stock</option>
+          </select>
+        </div>
+
+        <div class="form-group" style="justify-content: flex-end;">
+          <button type="button" class="btn btn-primary" style="margin-top: auto;">Filter Products</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div id="products-grid" class="item-grid">
+      <!-- Loaded dynamically via js/products.js -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <p>&copy; 2026 Pet Haven Store. All rights reserved.</p>
+        <a href="admin/login.html" style="color: var(--primary-800); font-weight: 600;">Admin Dashboard Login →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/products.js"></script>
+</body>
+</html>
