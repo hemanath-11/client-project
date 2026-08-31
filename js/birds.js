@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pet Haven - Birds Catalog Page Controller (Instant Render & Smooth Sync)
+   Pet Haven - Birds Catalog Page Controller
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -12,19 +12,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!container) return;
 
-  // Instant Cache-First fetch
-  let allBirds = await db.getBirds((freshBirds) => {
-    allBirds = freshBirds;
-    populateSpeciesFilter(allBirds);
-    applyFilters();
-  });
+  if (typeof renderSkeletons === 'function') renderSkeletons(container, 6);
 
+  let allBirds = await db.getBirds();
   populateSpeciesFilter(allBirds);
+  renderBirds(container, allBirds);
 
   function populateSpeciesFilter(birds) {
     if (!speciesFilter) return;
     const selected = speciesFilter.value;
-    const speciesSet = new Set(birds.map(b => b.species ? b.species.trim() : '').filter(Boolean));
+    const speciesSet = new Set((birds || []).map(b => b.species ? b.species.trim() : '').filter(Boolean));
     const speciesList = Array.from(speciesSet).sort();
 
     speciesFilter.innerHTML = `<option value="">All Species</option>` +
@@ -35,19 +32,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
     const selectedSpecies = speciesFilter ? speciesFilter.value.toLowerCase().trim() : '';
     const selectedGender = genderFilter ? genderFilter.value.toLowerCase().trim() : '';
-    const maxPrice = priceFilter ? parseFloat(priceFilter.value) || Infinity : Infinity;
+    const maxPrice = priceFilter && priceFilter.value ? parseFloat(priceFilter.value) : Infinity;
     const selectedAvailability = availabilityFilter ? availabilityFilter.value.toLowerCase().trim() : '';
 
-    const filtered = allBirds.filter(bird => {
+    const filtered = (allBirds || []).filter(bird => {
       const birdName = (bird.name || '').toLowerCase();
       const birdSpecies = (bird.species || '').toLowerCase();
       const birdGender = (bird.gender || '').toLowerCase();
-      const birdAvailability = (bird.availability || '').toLowerCase();
+      const birdAvailability = (bird.availability || 'available').toLowerCase();
+      const birdPrice = Number(bird.price) || 0;
 
       const matchesSearch = !searchTerm || birdName.includes(searchTerm) || birdSpecies.includes(searchTerm);
       const matchesSpecies = !selectedSpecies || birdSpecies === selectedSpecies;
       const matchesGender = !selectedGender || birdGender === selectedGender;
-      const matchesPrice = bird.price <= maxPrice;
+      const matchesPrice = !maxPrice || birdPrice <= maxPrice;
       const matchesAvailability = !selectedAvailability || birdAvailability === selectedAvailability;
 
       return matchesSearch && matchesSpecies && matchesGender && matchesPrice && matchesAvailability;
@@ -61,8 +59,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (genderFilter) genderFilter.addEventListener('change', applyFilters);
   if (priceFilter) priceFilter.addEventListener('input', applyFilters);
   if (availabilityFilter) availabilityFilter.addEventListener('change', applyFilters);
-
-  renderBirds(container, allBirds);
 });
 
 function renderBirds(container, birds) {

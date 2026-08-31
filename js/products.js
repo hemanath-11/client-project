@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pet Haven - Products Catalog Page Controller (Instant Render & Smooth Sync)
+   Pet Haven - Products Catalog Page Controller
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -12,26 +12,23 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!container) return;
 
-  // Instant Cache-First fetch
-  let allProducts = await db.getProducts((freshProducts) => {
-    allProducts = freshProducts;
-    populateProductDropdowns(allProducts);
-    applyFilters();
-  });
+  if (typeof renderSkeletons === 'function') renderSkeletons(container, 6);
 
+  let allProducts = await db.getProducts();
   populateProductDropdowns(allProducts);
+  renderProducts(container, allProducts);
 
   function populateProductDropdowns(products) {
     if (categoryFilter) {
       const selectedCat = categoryFilter.value;
-      const catSet = new Set(products.map(p => p.category ? p.category.trim() : '').filter(Boolean));
+      const catSet = new Set((products || []).map(p => p.category ? p.category.trim() : '').filter(Boolean));
       const catList = Array.from(catSet).sort();
       categoryFilter.innerHTML = `<option value="">All Categories</option>` +
         catList.map(c => `<option value="${c}" ${c.toLowerCase() === selectedCat.toLowerCase() ? 'selected' : ''}>${c}</option>`).join('');
     }
     if (brandFilter) {
       const selectedBrand = brandFilter.value;
-      const brandSet = new Set(products.map(p => p.brand ? p.brand.trim() : '').filter(Boolean));
+      const brandSet = new Set((products || []).map(p => p.brand ? p.brand.trim() : '').filter(Boolean));
       const brandList = Array.from(brandSet).sort();
       brandFilter.innerHTML = `<option value="">All Brands</option>` +
         brandList.map(b => `<option value="${b}" ${b.toLowerCase() === selectedBrand.toLowerCase() ? 'selected' : ''}>${b}</option>`).join('');
@@ -42,19 +39,20 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
     const selectedCategory = categoryFilter ? categoryFilter.value.toLowerCase().trim() : '';
     const selectedBrand = brandFilter ? brandFilter.value.toLowerCase().trim() : '';
-    const maxPrice = priceFilter ? parseFloat(priceFilter.value) || Infinity : Infinity;
+    const maxPrice = priceFilter && priceFilter.value ? parseFloat(priceFilter.value) : Infinity;
     const selectedAvailability = availabilityFilter ? availabilityFilter.value.toLowerCase().trim() : '';
 
-    const filtered = allProducts.filter(prod => {
+    const filtered = (allProducts || []).filter(prod => {
       const prodName = (prod.name || '').toLowerCase();
       const prodBrand = (prod.brand || '').toLowerCase();
       const prodCategory = (prod.category || '').toLowerCase();
-      const prodAvailability = (prod.availability || '').toLowerCase();
+      const prodAvailability = (prod.availability || 'in stock').toLowerCase();
+      const prodPrice = Number(prod.price) || 0;
 
       const matchesSearch = !searchTerm || prodName.includes(searchTerm) || prodBrand.includes(searchTerm) || prodCategory.includes(searchTerm);
       const matchesCategory = !selectedCategory || prodCategory === selectedCategory;
       const matchesBrand = !selectedBrand || prodBrand === selectedBrand;
-      const matchesPrice = prod.price <= maxPrice;
+      const matchesPrice = !maxPrice || prodPrice <= maxPrice;
       const matchesAvailability = !selectedAvailability || prodAvailability === selectedAvailability;
 
       return matchesSearch && matchesCategory && matchesBrand && matchesPrice && matchesAvailability;
@@ -68,8 +66,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (brandFilter) brandFilter.addEventListener('change', applyFilters);
   if (priceFilter) priceFilter.addEventListener('input', applyFilters);
   if (availabilityFilter) availabilityFilter.addEventListener('change', applyFilters);
-
-  renderProducts(container, allProducts);
 });
 
 function renderProducts(container, products) {

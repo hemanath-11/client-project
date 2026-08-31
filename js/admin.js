@@ -158,7 +158,7 @@ async function loadPetsTable() {
         <td>${pet.category} (${pet.breed})</td>
         <td>${pet.age} / ${pet.gender}</td>
         <td>${formatCurrency(pet.price)}</td>
-        <td><span class="badge ${(pet.availability || '').toLowerCase() === 'available' ? 'badge-available' : 'badge-adopted'}">${pet.availability}</span></td>
+        <td><span class="badge ${(pet.availability || 'Available').toLowerCase() === 'available' ? 'badge-available' : 'badge-adopted'}">${pet.availability || 'Available'}</span></td>
         <td class="actions-cell">
           <button onclick="openEditPetModal('${pet.id}')" class="btn btn-outline btn-sm">Edit</button>
           <button onclick="confirmDeletePet('${pet.id}', '${(pet.name || '').replace(/'/g, "\\'")}')" class="btn btn-outline btn-sm" style="color: var(--danger); border-color: #FCA5A5;">Delete</button>
@@ -272,7 +272,7 @@ async function loadBirdsTable() {
         <td>${bird.species}</td>
         <td>${bird.age} / ${bird.gender}</td>
         <td>${formatCurrency(bird.price)}</td>
-        <td><span class="badge ${(bird.availability || '').toLowerCase() === 'available' ? 'badge-available' : 'badge-adopted'}">${bird.availability}</span></td>
+        <td><span class="badge ${(bird.availability || 'Available').toLowerCase() === 'available' ? 'badge-available' : 'badge-adopted'}">${bird.availability || 'Available'}</span></td>
         <td class="actions-cell">
           <button onclick="openEditBirdModal('${bird.id}')" class="btn btn-outline btn-sm">Edit</button>
           <button onclick="confirmDeleteBird('${bird.id}', '${(bird.name || '').replace(/'/g, "\\'")}')" class="btn btn-outline btn-sm" style="color: var(--danger); border-color: #FCA5A5;">Delete</button>

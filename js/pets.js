@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Pet Haven - Pets Catalog Page Controller (Instant Render & Smooth Sync)
+   Pet Haven - Pets Catalog Page Controller
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -12,19 +12,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (!container) return;
 
-  // Instant Cache-First fetch (0ms render time)
-  let allPets = await db.getPets((freshPets) => {
-    allPets = freshPets;
-    populateCategoryFilter(allPets);
-    applyFilters();
-  });
+  // Show loading skeleton while fetching
+  if (typeof renderSkeletons === 'function') renderSkeletons(container, 6);
 
+  // Fetch pets directly from Supabase
+  let allPets = await db.getPets();
   populateCategoryFilter(allPets);
+  renderPets(container, allPets);
 
   function populateCategoryFilter(pets) {
     if (!categoryFilter) return;
     const selected = categoryFilter.value;
-    const catSet = new Set(pets.map(p => p.category ? p.category.trim() : '').filter(Boolean));
+    const catSet = new Set((pets || []).map(p => p.category ? p.category.trim() : '').filter(Boolean));
     const catList = Array.from(catSet).sort();
 
     categoryFilter.innerHTML = `<option value="">All Categories</option>` +
@@ -35,20 +34,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
     const selectedCategory = categoryFilter ? categoryFilter.value.toLowerCase().trim() : '';
     const selectedGender = genderFilter ? genderFilter.value.toLowerCase().trim() : '';
-    const maxPrice = priceFilter ? parseFloat(priceFilter.value) || Infinity : Infinity;
+    const maxPrice = priceFilter && priceFilter.value ? parseFloat(priceFilter.value) : Infinity;
     const selectedAvailability = availabilityFilter ? availabilityFilter.value.toLowerCase().trim() : '';
 
-    const filtered = allPets.filter(pet => {
+    const filtered = (allPets || []).filter(pet => {
       const petName = (pet.name || '').toLowerCase();
       const petBreed = (pet.breed || '').toLowerCase();
       const petCategory = (pet.category || '').toLowerCase();
       const petGender = (pet.gender || '').toLowerCase();
-      const petAvailability = (pet.availability || '').toLowerCase();
+      const petAvailability = (pet.availability || 'available').toLowerCase();
+      const petPrice = Number(pet.price) || 0;
 
       const matchesSearch = !searchTerm || petName.includes(searchTerm) || petBreed.includes(searchTerm) || petCategory.includes(searchTerm);
       const matchesCategory = !selectedCategory || petCategory === selectedCategory;
       const matchesGender = !selectedGender || petGender === selectedGender;
-      const matchesPrice = pet.price <= maxPrice;
+      const matchesPrice = !maxPrice || petPrice <= maxPrice;
       const matchesAvailability = !selectedAvailability || petAvailability === selectedAvailability;
 
       return matchesSearch && matchesCategory && matchesGender && matchesPrice && matchesAvailability;
@@ -63,9 +63,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (genderFilter) genderFilter.addEventListener('change', applyFilters);
   if (priceFilter) priceFilter.addEventListener('input', applyFilters);
   if (availabilityFilter) availabilityFilter.addEventListener('change', applyFilters);
-
-  // Initial instant render
-  renderPets(container, allPets);
 });
 
 function renderPets(container, pets) {
@@ -81,4 +78,21 @@ function renderPets(container, pets) {
   }
 
   container.innerHTML = pets.map(createPetCardHtml).join('');
+}
+
+function renderSkeletons(container, count = 6) {
+  let html = '';
+  for (let i = 0; i < count; i++) {
+    html += `
+      <div class="skeleton-card">
+        <div class="skeleton-img"></div>
+        <div class="skeleton-body">
+          <div class="skeleton-line" style="width: 60%;"></div>
+          <div class="skeleton-line" style="width: 40%;"></div>
+          <div class="skeleton-line" style="width: 90%;"></div>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
 }

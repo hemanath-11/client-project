@@ -77,27 +77,34 @@ function showToast(message, type = 'success') {
 
 // Render Pet Card Component
 function createPetCardHtml(pet) {
-  const mainImg = (pet.images && pet.images.length > 0) ? pet.images[0] : 'assets/hero_pets.jpg';
-  const waUrl = generateWhatsAppUrl(pet.name + ' (' + pet.breed + ')', pet.price);
+  let mainImg = 'assets/hero_pets.jpg';
+  if (Array.isArray(pet.images) && pet.images.length > 0) {
+    mainImg = pet.images[0];
+  } else if (typeof pet.images === 'string' && pet.images.length > 0) {
+    mainImg = pet.images;
+  }
+  const avail = pet.availability || 'Available';
+  const desc = (pet.description || '').substring(0, 75);
+  const waUrl = generateWhatsAppUrl((pet.name || 'Pet') + ' (' + (pet.breed || '') + ')', pet.price || 0);
 
   return `
     <div class="item-card">
       <div class="item-card-image">
-        <img src="${mainImg}" alt="${pet.name}" loading="lazy" onerror="this.src='assets/hero_pets.jpg'">
-        <span class="badge ${pet.availability === 'Available' ? 'badge-available' : 'badge-adopted'}">
-          ${pet.availability}
+        <img src="${mainImg}" alt="${pet.name || 'Pet'}" loading="lazy" onerror="this.src='assets/hero_pets.jpg'">
+        <span class="badge ${avail.toLowerCase() === 'available' ? 'badge-available' : 'badge-adopted'}">
+          ${avail}
         </span>
       </div>
       <div class="item-card-body">
         <div class="item-card-header">
-          <h3 class="item-title">${pet.name}</h3>
-          <span class="item-price">${formatCurrency(pet.price)}</span>
+          <h3 class="item-title">${pet.name || 'Unnamed Pet'}</h3>
+          <span class="item-price">${formatCurrency(pet.price || 0)}</span>
         </div>
         <div class="item-meta">
-          <span>${pet.category}</span> • <span>${pet.breed}</span> • <span>${pet.age}</span>
+          <span>${pet.category || ''}</span> • <span>${pet.breed || ''}</span> • <span>${pet.age || ''}</span>
         </div>
         <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
-          ${pet.description.substring(0, 75)}...
+          ${desc}${desc.length >= 75 ? '...' : ''}
         </p>
         <div class="item-card-footer">
           <a href="pet-detail.html?id=${pet.id}" class="btn btn-outline btn-sm" style="flex: 1;">View Details</a>
@@ -112,27 +119,34 @@ function createPetCardHtml(pet) {
 
 // Render Bird Card Component
 function createBirdCardHtml(bird) {
-  const mainImg = (bird.images && bird.images.length > 0) ? bird.images[0] : 'assets/hero_pets.jpg';
-  const waUrl = generateWhatsAppUrl(bird.name + ' (' + bird.species + ')', bird.price);
+  let mainImg = 'assets/hero_pets.jpg';
+  if (Array.isArray(bird.images) && bird.images.length > 0) {
+    mainImg = bird.images[0];
+  } else if (typeof bird.images === 'string' && bird.images.length > 0) {
+    mainImg = bird.images;
+  }
+  const avail = bird.availability || 'Available';
+  const desc = (bird.description || '').substring(0, 75);
+  const waUrl = generateWhatsAppUrl((bird.name || 'Bird') + ' (' + (bird.species || '') + ')', bird.price || 0);
 
   return `
     <div class="item-card">
       <div class="item-card-image">
-        <img src="${mainImg}" alt="${bird.name}" loading="lazy" onerror="this.src='assets/hero_pets.jpg'">
-        <span class="badge ${bird.availability === 'Available' ? 'badge-available' : 'badge-adopted'}">
-          ${bird.availability}
+        <img src="${mainImg}" alt="${bird.name || 'Bird'}" loading="lazy" onerror="this.src='assets/hero_pets.jpg'">
+        <span class="badge ${avail.toLowerCase() === 'available' ? 'badge-available' : 'badge-adopted'}">
+          ${avail}
         </span>
       </div>
       <div class="item-card-body">
         <div class="item-card-header">
-          <h3 class="item-title">${bird.name}</h3>
-          <span class="item-price">${formatCurrency(bird.price)}</span>
+          <h3 class="item-title">${bird.name || 'Unnamed Bird'}</h3>
+          <span class="item-price">${formatCurrency(bird.price || 0)}</span>
         </div>
         <div class="item-meta">
-          <span>${bird.species}</span> • <span>${bird.age}</span> • <span>${bird.gender}</span>
+          <span>${bird.species || ''}</span> • <span>${bird.age || ''}</span> • <span>${bird.gender || ''}</span>
         </div>
         <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
-          ${bird.description.substring(0, 75)}...
+          ${desc}${desc.length >= 75 ? '...' : ''}
         </p>
         <div class="item-card-footer">
           <a href="bird-detail.html?id=${bird.id}" class="btn btn-outline btn-sm" style="flex: 1;">View Details</a>
@@ -147,27 +161,34 @@ function createBirdCardHtml(bird) {
 
 // Render Product Card Component
 function createProductCardHtml(product) {
-  const mainImg = (product.images && product.images.length > 0) ? product.images[0] : 'assets/hero_pets.jpg';
-  const waUrl = generateWhatsAppUrl(product.name, product.price);
+  let mainImg = 'assets/hero_pets.jpg';
+  if (Array.isArray(product.images) && product.images.length > 0) {
+    mainImg = product.images[0];
+  } else if (typeof product.images === 'string' && product.images.length > 0) {
+    mainImg = product.images;
+  }
+  const avail = product.availability || 'In Stock';
+  const desc = (product.description || '').substring(0, 75);
+  const waUrl = generateWhatsAppUrl(product.name || 'Product', product.price || 0);
 
   return `
     <div class="item-card">
       <div class="item-card-image">
-        <img src="${mainImg}" alt="${product.name}" loading="lazy" onerror="this.src='assets/hero_pets.jpg'">
+        <img src="${mainImg}" alt="${product.name || 'Product'}" loading="lazy" onerror="this.src='assets/hero_pets.jpg'">
         <span class="badge badge-available">
-          ${product.availability}
+          ${avail}
         </span>
       </div>
       <div class="item-card-body">
         <div class="item-card-header">
-          <h3 class="item-title">${product.name}</h3>
-          <span class="item-price">${formatCurrency(product.price)}</span>
+          <h3 class="item-title">${product.name || 'Unnamed Product'}</h3>
+          <span class="item-price">${formatCurrency(product.price || 0)}</span>
         </div>
         <div class="item-meta">
-          <span>${product.category}</span> • <span>${product.brand}</span>
+          <span>${product.category || ''}</span> • <span>${product.brand || ''}</span>
         </div>
         <p class="text-muted" style="font-size: 0.875rem; margin-bottom: 1rem;">
-          ${product.description.substring(0, 75)}...
+          ${desc}${desc.length >= 75 ? '...' : ''}
         </p>
         <div class="item-card-footer">
           <a href="product-detail.html?id=${product.id}" class="btn btn-outline btn-sm" style="flex: 1;">View Product</a>
